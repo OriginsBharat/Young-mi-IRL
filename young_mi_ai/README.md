@@ -18,69 +18,43 @@ This project is a Discord bot designed to be a deeply personal AI companion, mod
 
 ---
 
-## Setup Instructions
+## Setup: The One-Click Experience
 
-### 1. Prerequisites
-Before you begin, ensure you have the following software installed and running on your computer:
-- **Python 3.8+**
-- **Ollama:** With the `dolphin-2.2.1-AshhLimaRP-Mistral-7B-GGUF:Q4_K_M` model pulled.
-- **ComfyUI:** Running and accessible via its API.
-- **XTTSv2:** Running and accessible via its API (e.g., using the `xtts-webui`).
+The goal is to make starting her as simple as a single click. This requires a **one-time setup** to tell the launchers where your programs are located.
 
-### 2. Install Dependencies
-Install the required Python libraries by running this command in your terminal from the `young_mi_ai` directory:
+### Step 1: Install Dependencies
+First, install the required Python libraries. Open a terminal in this folder and run:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Run the Interactive Setup
-Instead of manually creating configuration files, simply run the interactive setup script. It will ask you for all the necessary information and create the `config.json` file for you.
+### Step 2: Configure the Bot's Brain (`setup.py`)
+Run the interactive setup script to configure the bot's settings (like Discord tokens and channel IDs). This script creates the `config.json` file for you.
 ```bash
 python setup.py
 ```
-You will be prompted for your tokens, user/channel IDs, and file paths.
 
-### 4. Configure ComfyUI and Persona
-- **ComfyUI Workflow:** You still need to set up your `comfyui_workflow.json`.
-  1. Make a copy of `comfyui_workflow.json.template` and rename it to `comfyui_workflow.json`.
-  2. In your ComfyUI interface, load your workflow and click "Save (API Format)".
-  3. Copy the contents of that saved file into your new `comfyui_workflow.json`.
-- **Persona Kinks:** Open `persona.md` and fill out the `## Intimate Preferences & Kinks` section at the bottom. This is vital for her personality.
+### Step 3: Configure the Launchers (One-Time Edit)
+This is the key step to enable the one-click launch.
+1.  Navigate into the `launchers` directory.
+2.  You will see several `.bat` (for Windows) or `.sh` (for macOS/Linux) files.
+3.  **Right-click and edit** each of the individual service launchers (`start_ollama`, `start_comfyui`, `start_xtts`).
+4.  Follow the instructions inside each file to **paste the correct path** to where you have that program installed.
 
-### 5. Run the Bot
-Once configured, start the bot from your terminal:
-```bash
-python src/main.py
-```
-She will send a message in your main text channel when she's online.
+### Step 4: Final Persona & Art Setup
+1.  **Persona:** Open `persona.md` and fill out the `## Intimate Preferences & Kinks` section at the bottom. This is vital for her personality.
+2.  **Art Style:** Make a copy of `comfyui_workflow.json.template`, rename it to `comfyui_workflow.json`, and paste your own ComfyUI "API Format" workflow inside.
 
----
+### Step 5: The One-Click Launch!
+From now on, whenever you want to start her, simply go into the `launchers` folder and **double-click `start_everything.bat` (on Windows) or run `./start_everything.sh` (on macOS/Linux).**
 
-## Achieving the 24/7 "Always Online" Illusion
+This single action will:
+1.  Start your Ollama server.
+2.  Start your ComfyUI server.
+3.  Start your XTTS server.
+4.  Finally, start the Kim Young-mi bot itself.
 
-To make her feel truly present, you can run the bot as a background service. This means she will start automatically with your computer and run silently without needing an open terminal window.
-
-### For Windows (using Task Scheduler):
-1.  Create a file named `run.bat` in the `young_mi_ai` folder with the following content (replace `C:\path\to\python.exe` with your actual Python path):
-    ```batch
-    @echo off
-    cd /d "%~dp0"
-    C:\path\to\python.exe src/main.py
-    ```
-2.  Open **Task Scheduler**.
-3.  Click **Create Basic Task...**.
-4.  Name it something like "YoungMiAI" and set the trigger to **When I log on**.
-5.  For the action, select **Start a program** and browse to your `run.bat` file.
-6.  Finish the wizard. She will now start automatically whenever you log in.
-
-### For macOS / Linux (using `nohup`):
-A simple way is to use `nohup` (no hang-up), which keeps the process running even if you close the terminal.
-1.  Open a terminal and navigate to the `young_mi_ai` directory.
-2.  Run the following command:
-    ```bash
-    nohup python3 src/main.py &
-    ```
-3.  This will start the bot in the background. To stop her, you'll need to find her process ID (`ps aux | grep main.py`) and use the `kill` command. For a more robust solution, look into setting up a `systemd` service on Linux or a `launchd` agent on macOS.
+She will wake up and send her "catch-up" message in your Discord server.
 
 ---
 
