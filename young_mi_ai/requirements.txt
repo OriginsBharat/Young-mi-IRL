@@ -1,0 +1,12 @@
+# Discord bot
+discord.py
+
+# HTTP requests for APIs
+aiohttp
+
+# For real-time audio processing (optional, for future expansion)
+# sounddevice
+# numpy
+
+# For TTS and other async tasks
+asyncio

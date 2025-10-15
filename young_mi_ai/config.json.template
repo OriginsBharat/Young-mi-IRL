@@ -1,0 +1,14 @@
+{
+    "discord_bot_token": "YOUR_DISCORD_BOT_TOKEN_HERE",
+    "ollama_api_url": "http://localhost:11434",
+    "ollama_model": "TheBloke/dolphin-2.2.1-AshhLimaRP-Mistral-7B-GGUF:Q4_K_M",
+    "comfyui_api_url": "http://localhost:8188",
+    "xtts_api_url": "http://localhost:8020/tts",
+    "voice_audio_path": "path/to/your/Tashi.mp3",
+    "persona_file": "persona.md",
+    "database_file": "memory.db",
+    "your_user_id": "YOUR_DISCORD_USER_ID_HERE",
+    "text_channel_id": "ID_OF_THE_TEXT_CHANNEL_HERE",
+    "gallery_channel_id": "ID_OF_THE_GALLERY_CHANNEL_HERE",
+    "voice_channel_id": "ID_OF_THE_VOICE_CHANNEL_HERE"
+}
