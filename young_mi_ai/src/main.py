@@ -62,9 +62,19 @@ def main():
         logging.info("Shutdown signal received. Closing bot...")
     except Exception as e:
         logging.critical(f"A critical error occurred while running the bot: {e}")
+import time
+
     finally:
         # This part will run upon bot shutdown (e.g., Ctrl+C)
         async def cleanup():
+            # Save the shutdown state first
+            try:
+                with open('bot_state.json', 'w') as f:
+                    json.dump({'last_shutdown_time': time.time()}, f)
+                logging.info("Saved bot state with shutdown timestamp.")
+            except Exception as e:
+                logging.error(f"Failed to save bot state: {e}")
+
             if heartbeat and heartbeat._task:
                 logging.info("Stopping heartbeat...")
                 await heartbeat.stop()

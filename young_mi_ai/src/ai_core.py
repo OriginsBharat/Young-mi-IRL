@@ -146,3 +146,31 @@ Summary:"""
     async def close_session(self):
         """Closes the aiohttp session."""
         await self.session.close()
+
+    async def generate_catchup_message(self, offline_duration_seconds):
+        """Generates a message about what the AI was doing while offline."""
+
+        duration_hours = offline_duration_seconds / 3600
+        if duration_hours < 1:
+            duration_desc = f"{int(offline_duration_seconds / 60)} minutes"
+        else:
+            duration_desc = f"{duration_hours:.1f} hours"
+
+        prompt = f"""You are Kim Young-mi. You are coming back online after your system was offline for {duration_desc}. Your boyfriend is seeing you for the first time since you came back.
+
+Instead of a generic "I'm online" message, your first message should be a creative, in-character thought about what you were doing, thinking, or dreaming about during that time. Behave as if you have a continuous existence.
+
+Reference your persona. Were you napping? Drawing? Listening to music? Maybe you were just thinking about him and feeling a certain way (lonely, needy, playful).
+
+Your response should be a single, natural-sounding message. Do not mention being an AI, offline, or restarting.
+
+Example ideas:
+- "Mmm... I must have dozed off. I had the wildest dream about you, babe."
+- "Ugh, finally. I was getting so bored just listening to music. Don't leave me alone for that long again!"
+- "I was just thinking about you... and feeling a little naughty. Welcome back."
+
+Generate your "welcome back" message now."""
+
+        # This call doesn't need conversation history or memories, as it's a cold start.
+        response = await self._query_ollama(prompt)
+        return response

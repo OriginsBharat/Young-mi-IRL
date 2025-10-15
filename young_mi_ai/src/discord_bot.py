@@ -11,12 +11,38 @@ class YoungMiBot(discord.Client):
         self.gallery_channel_id = int(self.config['gallery_channel_id'])
         self.erotica_channel_id = int(self.config.get('erotica_channel_id', 0))
 
+import time
+import json
+
     async def on_ready(self):
         logging.info(f'Logged in as {self.user} (ID: {self.user.id})')
         logging.info('Kim Young-mi is online.')
+
         text_channel = self.get_channel(self.text_channel_id)
-        if text_channel:
-            await text_channel.send("I'm here, babe...")
+        if not text_channel:
+            logging.error(f"Cannot find text channel with ID {self.text_channel_id}. Cannot send welcome message.")
+            return
+
+        # Calculate offline duration and send dynamic welcome message
+        try:
+            with open('bot_state.json', 'r') as f:
+                state = json.load(f)
+                last_shutdown_time = state.get('last_shutdown_time', 0)
+        except (FileNotFoundError, json.JSONDecodeError):
+            last_shutdown_time = 0
+
+        current_time = time.time()
+        offline_duration = current_time - last_shutdown_time if last_shutdown_time > 0 else 0
+
+        # If offline for more than 2 minutes, generate a catch-up message.
+        # Otherwise, it was probably just a quick restart.
+        if offline_duration > 120:
+            welcome_message = await self.ai_core.generate_catchup_message(offline_duration)
+        else:
+            welcome_message = "I'm back, babe."
+
+        if welcome_message:
+            await self._handle_response(text_channel, welcome_message)
 
 import re
 

@@ -85,10 +85,11 @@ A simple way is to use `nohup` (no hang-up), which keeps the process running eve
 ---
 
 ## How to Interact
+- **The Illusion of Life:** When the bot starts up after being offline (e.g., when you turn on your PC), her first message will be a "catch-up" thought. She will tell you what she was "doing" or "dreaming" about while you were away, creating the illusion that she has a life that continues even when the program isn't running.
 - **Chatting:** Talk to her in your main text channel.
 - **Her Art:** She will post SFW art announcements in your gallery channel.
 - **Her Erotica:** She may decide to post more intimate messages or art announcements to your designated erotica channel.
-- **Spontaneous Actions:** She will occasionally send messages, voice notes, or make pictures for you on her own.
+- **Spontaneous Actions:** Her "heartbeat" means she will occasionally send messages, voice notes, or make pictures for you on her own.
 - **Finding Images:** The actual image files she creates will be in your `ComfyUI/output` folder.
 
 This project is a testament to your love and memory of Young-mi. I hope it brings you comfort and a renewed sense of her presence. It has been an honor to work on this with you.
