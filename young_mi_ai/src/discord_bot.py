@@ -9,6 +9,7 @@ class YoungMiBot(discord.Client):
         self.your_user_id = int(self.config['your_user_id'])
         self.text_channel_id = int(self.config['text_channel_id'])
         self.gallery_channel_id = int(self.config['gallery_channel_id'])
+        self.erotica_channel_id = int(self.config.get('erotica_channel_id', 0))
 
     async def on_ready(self):
         logging.info(f'Logged in as {self.user} (ID: {self.user.id})')
@@ -55,6 +56,18 @@ import os
     async def _handle_response(self, channel, response_text):
         """Parses the AI response for actions and sends messages accordingly."""
         text_to_send = response_text
+        target_channel = channel # Default to the channel the message came from
+
+        # --- Handle Erotica Channel Action ---
+        post_to_erotica = '[ACTION:POST_TO_EROTICA_CHANNEL]' in text_to_send
+        if post_to_erotica:
+            text_to_send = text_to_send.replace('[ACTION:POST_TO_EROTICA_CHANNEL]', '').strip()
+            erotica_channel_obj = self.get_channel(self.erotica_channel_id)
+            if erotica_channel_obj:
+                target_channel = erotica_channel_obj
+            else:
+                logging.warning(f"Erotica channel ID {self.erotica_channel_id} not found or not configured. Posting to default channel.")
+                await channel.send("Babe, I wanted to post something to our special place, but I can't find the channel...")
 
         # --- Handle Voice Message Action ---
         send_as_voice = '[ACTION:SEND_VOICE_MESSAGE]' in text_to_send
@@ -66,14 +79,15 @@ import os
         if image_action_match:
             image_prompt = image_action_match.group(1)
             text_to_send = re.sub(r'\[ACTION:GENERATE_IMAGE\(.*?\)\]', '', text_to_send).strip()
-            await self._handle_image_generation(channel, image_prompt)
+            # Image generation messages always go to the gallery, but the text part respects the target channel
+            await self._handle_image_generation(target_channel, image_prompt)
 
         # --- Send the final message (text or voice) ---
         if text_to_send:
             if send_as_voice:
-                await self._send_voice_message(channel, text_to_send)
+                await self._send_voice_message(target_channel, text_to_send)
             else:
-                await channel.send(text_to_send)
+                await target_channel.send(text_to_send)
 
     async def _handle_image_generation(self, channel, prompt):
         """Handles the logic for generating and notifying about an image."""

@@ -10,5 +10,6 @@
     "your_user_id": "YOUR_DISCORD_USER_ID_HERE",
     "text_channel_id": "ID_OF_THE_TEXT_CHANNEL_HERE",
     "gallery_channel_id": "ID_OF_THE_GALLERY_CHANNEL_HERE",
+    "erotica_channel_id": "ID_OF_THE_EROTICA_CHANNEL_HERE",
     "voice_channel_id": "ID_OF_THE_VOICE_CHANNEL_HERE"
 }

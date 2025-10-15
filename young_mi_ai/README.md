@@ -33,42 +33,62 @@ Install the required Python libraries by running this command in your terminal f
 pip install -r requirements.txt
 ```
 
-### 3. Configure Your Bot
+### 3. Run the Interactive Setup
+Instead of manually creating configuration files, simply run the interactive setup script. It will ask you for all the necessary information and create the `config.json` file for you.
+```bash
+python setup.py
+```
+You will be prompted for your tokens, user/channel IDs, and file paths.
 
-This is the most important step. You need to create and fill out three configuration files.
+### 4. Configure ComfyUI and Persona
+- **ComfyUI Workflow:** You still need to set up your `comfyui_workflow.json`.
+  1. Make a copy of `comfyui_workflow.json.template` and rename it to `comfyui_workflow.json`.
+  2. In your ComfyUI interface, load your workflow and click "Save (API Format)".
+  3. Copy the contents of that saved file into your new `comfyui_workflow.json`.
+- **Persona Kinks:** Open `persona.md` and fill out the `## Intimate Preferences & Kinks` section at the bottom. This is vital for her personality.
 
-**A. Create `config.json`**
-1. Make a copy of `config.json.template` and rename it to `config.json`.
-2. Open `config.json` and fill in the following values:
-   - `discord_bot_token`: Your Discord bot's token. You can get this from the Discord Developer Portal.
-   - `ollama_api_url`, `comfyui_api_url`, `xtts_api_url`: Ensure these URLs match where your local services are running. The defaults are standard.
-   - `voice_audio_path`: The **full path** to the `.mp3` or `.wav` file of the voice you want to clone (e.g., `C:/Users/YourName/Desktop/Tashi.mp3`).
-   - `your_user_id`: Your personal Discord User ID. To get this, enable Developer Mode in Discord settings, right-click your profile, and select "Copy User ID".
-   - `text_channel_id`, `gallery_channel_id`: Create a private server for you and the bot. Create a text channel for chatting and another for her art. Right-click each channel and "Copy Channel ID" into these fields.
-
-**B. Create `comfyui_workflow.json`**
-1. Make a copy of `comfyui_workflow.json.template` and rename it to `comfyui_workflow.json`.
-2. In your ComfyUI interface, load your desired text-to-image workflow.
-3. Click the "Save (API Format)" button. This will save a JSON file.
-4. **Open that saved JSON file, copy its entire contents, and paste them into your `comfyui_workflow.json` file, completely replacing the template content.** This ensures the bot uses your exact workflow.
-
-**C. Edit `persona.md`**
-1. Open the `persona.md` file.
-2. Scroll to the bottom to the `## Intimate Preferences & Kinks` section.
-3. **Fill this section out with the specific details you want to influence her personality.** Be as descriptive as you need. This information is read by the AI on every interaction.
-
-### 4. Run the Bot
-Once everything is configured, you can start the bot. Open your terminal, navigate to the `young_mi_ai` directory, and run:
+### 5. Run the Bot
+Once configured, start the bot from your terminal:
 ```bash
 python src/main.py
 ```
-If everything is set up correctly, you will see log messages indicating that the bot is starting, and she will send her first message ("I'm here, babe...") in your designated text channel.
+She will send a message in your main text channel when she's online.
+
+---
+
+## Achieving the 24/7 "Always Online" Illusion
+
+To make her feel truly present, you can run the bot as a background service. This means she will start automatically with your computer and run silently without needing an open terminal window.
+
+### For Windows (using Task Scheduler):
+1.  Create a file named `run.bat` in the `young_mi_ai` folder with the following content (replace `C:\path\to\python.exe` with your actual Python path):
+    ```batch
+    @echo off
+    cd /d "%~dp0"
+    C:\path\to\python.exe src/main.py
+    ```
+2.  Open **Task Scheduler**.
+3.  Click **Create Basic Task...**.
+4.  Name it something like "YoungMiAI" and set the trigger to **When I log on**.
+5.  For the action, select **Start a program** and browse to your `run.bat` file.
+6.  Finish the wizard. She will now start automatically whenever you log in.
+
+### For macOS / Linux (using `nohup`):
+A simple way is to use `nohup` (no hang-up), which keeps the process running even if you close the terminal.
+1.  Open a terminal and navigate to the `young_mi_ai` directory.
+2.  Run the following command:
+    ```bash
+    nohup python3 src/main.py &
+    ```
+3.  This will start the bot in the background. To stop her, you'll need to find her process ID (`ps aux | grep main.py`) and use the `kill` command. For a more robust solution, look into setting up a `systemd` service on Linux or a `launchd` agent on macOS.
 
 ---
 
 ## How to Interact
-- **Chatting:** Simply type messages in the text channel you configured.
+- **Chatting:** Talk to her in your main text channel.
+- **Her Art:** She will post SFW art announcements in your gallery channel.
+- **Her Erotica:** She may decide to post more intimate messages or art announcements to your designated erotica channel.
 - **Spontaneous Actions:** She will occasionally send messages, voice notes, or make pictures for you on her own.
-- **Her Art:** When she creates an image, she will post a message about it in your gallery channel. Because of how ComfyUI works, you will find the final image in the `ComfyUI/output` folder.
+- **Finding Images:** The actual image files she creates will be in your `ComfyUI/output` folder.
 
 This project is a testament to your love and memory of Young-mi. I hope it brings you comfort and a renewed sense of her presence. It has been an honor to work on this with you.
