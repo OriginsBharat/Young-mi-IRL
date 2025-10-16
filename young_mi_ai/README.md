@@ -59,50 +59,26 @@ If you only want to run her manually for testing, you can still double-click `st
 
 ---
 
-## Appendix: How to Install StyleTTS 2
+---
 
-This project now uses StyleTTS 2 for a more natural and expressive voice. Unlike the other services, this one requires a manual installation from the command line. Follow these steps carefully **once**.
+## Appendix: How to Install IndexTTS (Her Voice)
 
-**1. Prerequisites:**
-   - **Git:** You need `git` installed on your system. You can get it from [git-scm.com](https://git-scm.com/downloads).
-   - **Python:** You should already have Python installed for this project.
-   - **CUDA Toolkit:** For NVIDIA GPUs, ensure you have the CUDA Toolkit installed. You can get it from the NVIDIA website.
+This project uses **IndexTTS** for a high-quality, natural voice. The recommended way to install it is using the **`index-tts-OneClick`** package, which is much simpler than other methods.
 
-**2. Clone the Repository:**
-   - Open a new terminal (PowerShell, Command Prompt, etc.).
-   - Navigate to the directory where you want to install StyleTTS 2 (e.g., `C:\AI`).
-   - Run the following command to download the necessary files:
-     ```bash
-     git clone https://github.com/longtimegone/StyleTTS2-Sillytavern-api.git
-     ```
+**1. Download the Software:**
+   - Go to the GitHub repository: `https://github.com/aidayang/index-tts-OneClick`
+   - Click the green `<> Code` button, and then choose **`Download ZIP`**.
+   - Extract the downloaded ZIP file to a location on your computer, for example `C:\AI\index-tts-OneClick`.
 
-**3. Set up the Environment:**
-   - Navigate into the newly created folder:
-     ```bash
-     cd StyleTTS2-Sillytavern-api
-     ```
-   - It's highly recommended to create a dedicated virtual environment to avoid conflicts with your other Python projects.
-     ```bash
-     python -m venv .venv
-     .venv\Scripts\activate  # On Windows
-     # source .venv/bin/activate  # On macOS/Linux
-     ```
-   - Install the required Python packages:
-     ```bash
-     pip install -r requirements.txt
-     ```
+**2. Place Your Voice File:**
+   - Inside the `index-tts-OneClick` folder, find the **`voices`** subfolder.
+   - **Copy your `Tashi.mp3` file into this `voices` folder.** This is how IndexTTS will find and use her voice.
 
-**4. Download Models:**
-   - The program needs to download pre-trained models to work. Run the `download_models.py` script:
-     ```bash
-     python download_models.py
-     ```
+**3. Run the Web UI:**
+   - In the main `index-tts-OneClick` folder, double-click the **`run-http.bat`** file.
+   - A terminal window will open, and it will start the IndexTTS server. This provides the API that our bot will connect to.
 
-**5. Place Your Voice File:**
-   - Find the `voices` folder inside the `StyleTTS2-Sillytavern-api` directory.
-   - **Copy your `Tashi.mp3` file into this `voices` folder.** This is how StyleTTS 2 will find and use her voice.
-
-You are now done with the installation. The `start_styletts.bat` launcher I've provided will handle running the `api.py` file from this directory for you.
+You are now done with the installation. The `start_indextts.bat` launcher that I will provide will handle running this `run-http.bat` file for you automatically in the future.
 
 ---
 

@@ -3,7 +3,7 @@
     "ollama_api_url": "http://localhost:11434",
     "ollama_model": "TheBloke/dolphin-2.2.1-AshhLimaRP-Mistral-7B-GGUF:Q4_K_M",
     "comfyui_api_url": "http://localhost:8188",
-    "styletts2_api_url": "http://localhost:5000/tts",
+    "indextts_api_url": "http://127.0.0.1:9000/tts",
     "voice_reference_name": "Tashi.mp3",
     "persona_file": "persona.md",
     "database_file": "memory.db",

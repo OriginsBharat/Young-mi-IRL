@@ -18,8 +18,8 @@ echo "[2/4] Starting ComfyUI..."
 bash "$DIR/start_comfyui.sh"
 sleep 10
 
-echo "[3/4] Starting StyleTTS 2 Server..."
-bash "$DIR/start_styletts.sh"
+echo "[3/4] Starting IndexTTS Server..."
+bash "$DIR/start_indextts.sh"
 sleep 10
 
 echo "[4/4] Starting Kim Young-mi Bot..."

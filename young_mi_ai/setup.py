@@ -30,8 +30,8 @@ def interactive_setup():
     default_comfyui = "http://localhost:8188"
     config['comfyui_api_url'] = input(f"ComfyUI API URL (default: {default_comfyui}): ").strip() or default_comfyui
 
-    default_styletts = "http://localhost:5000/tts"
-    config['styletts2_api_url'] = input(f"StyleTTS 2 API URL (default: {default_styletts}): ").strip() or default_styletts
+    default_indextts = "http://127.0.0.1:9000/tts"
+    config['indextts_api_url'] = input(f"IndexTTS API URL (default: {default_indextts}): ").strip() or default_indextts
 
     # --- Add other static values ---
     config['ollama_model'] = "TheBloke/dolphin-2.2.1-AshhLimaRP-Mistral-7B-GGUF:Q4_K_M"
