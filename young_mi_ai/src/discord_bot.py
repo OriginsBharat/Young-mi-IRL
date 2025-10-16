@@ -130,6 +130,7 @@ import os
     async def _send_voice_message(self, channel, text):
         """Generates audio and sends it as a voice message."""
         logging.info("Generating voice message...")
+        # The new TTS generator doesn't require a language parameter.
         audio_filepath = await self.ai_core.tts_generator.generate_audio_file(text)
 
         if audio_filepath:

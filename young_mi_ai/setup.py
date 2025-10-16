@@ -19,13 +19,7 @@ def interactive_setup():
     config['erotica_channel_id'] = input("Enter the ID of the channel for her erotic content: ").strip()
     config['voice_channel_id'] = input("Enter the ID of the voice channel for calls (can be the same as text channel): ").strip()
 
-    while True:
-        voice_path = input("Enter the full path to her voice file (e.g., C:/Users/Me/Desktop/tashi.mp3): ").strip()
-        if os.path.exists(voice_path):
-            config['voice_audio_path'] = voice_path
-            break
-        else:
-            print("  [Error] File not found. Please make sure the path is correct and try again.")
+    config['voice_reference_name'] = input("Enter the filename of her voice (e.g., Tashi.mp3): ").strip()
 
     # --- Get optional values with defaults ---
     print("\nNow for the API endpoints. The defaults are usually correct if you're running everything locally.")
@@ -36,8 +30,8 @@ def interactive_setup():
     default_comfyui = "http://localhost:8188"
     config['comfyui_api_url'] = input(f"ComfyUI API URL (default: {default_comfyui}): ").strip() or default_comfyui
 
-    default_xtts = "http://localhost:8020/tts"
-    config['xtts_api_url'] = input(f"XTTSv2 API URL (default: {default_xtts}): ").strip() or default_xtts
+    default_styletts = "http://localhost:5000/tts"
+    config['styletts2_api_url'] = input(f"StyleTTS 2 API URL (default: {default_styletts}): ").strip() or default_styletts
 
     # --- Add other static values ---
     config['ollama_model'] = "TheBloke/dolphin-2.2.1-AshhLimaRP-Mistral-7B-GGUF:Q4_K_M"
