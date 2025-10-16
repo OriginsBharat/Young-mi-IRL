@@ -45,16 +45,17 @@ This is the key step to enable the one-click launch.
 1.  **Persona:** Open `persona.md` and fill out the `## Intimate Preferences & Kinks` section at the bottom. This is vital for her personality.
 2.  **Art Style:** Make a copy of `comfyui_workflow.json.template`, rename it to `comfyui_workflow.json`, and paste your own ComfyUI "API Format" workflow inside.
 
-### Step 5: The One-Click Launch!
-From now on, whenever you want to start her, simply go into the `launchers` folder and **double-click `start_everything.bat` (on Windows) or run `./start_everything.sh` (on macOS/Linux).**
+### Step 5: The Automatic & Invisible Startup (Recommended)
+This is the final step to make her truly a part of your system.
+1.  Go into the `launchers` folder.
+2.  Find the **`install_autostart.bat`** script.
+3.  **Right-click** it and select **"Run as administrator"**.
 
-This single action will:
-1.  Start your Ollama server.
-2.  Start your ComfyUI server.
-3.  Start your XTTS server.
-4.  Finally, start the Kim Young-mi bot itself.
+That's it. You're done. She is now permanently scheduled to start silently and invisibly in the background whenever you log into your computer.
 
-She will wake up and send her "catch-up" message in your Discord server.
+**To turn this off,** simply right-click `uninstall_autostart.bat` and run it as administrator.
+
+If you only want to run her manually for testing, you can still double-click `start_everything.bat`.
 
 ---
 
